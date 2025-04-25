@@ -1,0 +1,407 @@
+/* xyflow theme files. Delete these to start from our base */
+
+.react-flow {
+  /* Custom Variables */
+  --xy-theme-selected: #f57dbd;
+  --xy-theme-hover: #c5c5c5;
+  --xy-theme-edge-hover: black;
+  --xy-theme-color-focus: #e8e8e8;
+
+  /* Built-in Variables see https://reactflow.dev/learn/customization/theming */
+  --xy-node-border-default: 1px solid #ededed;
+
+  --xy-node-boxshadow-default: 0px 3.54px 4.55px 0px #00000005,
+    0px 3.54px 4.55px 0px #0000000d, 0px 0.51px 1.01px 0px #0000001a;
+
+  --xy-node-border-radius-default: 8px;
+
+  --xy-handle-background-color-default: #ffffff;
+  --xy-handle-border-color-default: #aaaaaa;
+
+  --xy-edge-label-color-default: #505050;
+}
+
+.react-flow.dark {
+  --xy-node-boxshadow-default: 0px 3.54px 4.55px 0px rgba(255, 255, 255, 0.05),
+    /* light shadow */ 0px 3.54px 4.55px 0px rgba(255, 255, 255, 0.13),
+    /* medium shadow */ 0px 0.51px 1.01px 0px rgba(255, 255, 255, 0.2); /* smallest shadow */
+  --xy-theme-color-focus: #535353;
+}
+
+/* Customizing Default Theming */
+
+.react-flow__node {
+  box-shadow: var(--xy-node-boxshadow-default);
+  border-radius: var(--xy-node-border-radius-default);
+  background-color: var(--xy-node-background-color-default);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  flex-direction: column;
+  border: var(--xy-node-border-default);
+  color: var(--xy-node-color, var(--xy-node-color-default));
+}
+
+.react-flow__node.selectable:focus {
+  box-shadow: 0px 0px 0px 4px var(--xy-theme-color-focus);
+  border-color: #d9d9d9;
+}
+
+.react-flow__node.selectable:focus:active {
+  box-shadow: var(--xy-node-boxshadow-default);
+}
+
+.react-flow__node.selectable:hover,
+.react-flow__node.draggable:hover {
+  border-color: var(--xy-theme-hover);
+}
+
+.react-flow__node.selectable.selected {
+  border-color: var(--xy-theme-selected);
+  box-shadow: var(--xy-node-boxshadow-default);
+}
+
+.react-flow__node-group {
+  background-color: rgba(207, 182, 255, 0.4);
+  border-color: #9e86ed;
+}
+
+.react-flow__edge.selectable:hover .react-flow__edge-path,
+.react-flow__edge.selectable.selected .react-flow__edge-path {
+  stroke: var(--xy-theme-edge-hover);
+}
+
+.react-flow__handle {
+  background-color: var(--xy-handle-background-color-default);
+}
+
+.react-flow__handle.connectionindicator:hover {
+  pointer-events: all;
+  border-color: var(--xy-theme-edge-hover);
+  background-color: white;
+}
+
+.react-flow__handle.connectionindicator:focus,
+.react-flow__handle.connectingfrom,
+.react-flow__handle.connectingto {
+  border-color: var(--xy-theme-edge-hover);
+}
+
+.react-flow__node-resizer {
+  border-radius: 0;
+  border: none;
+}
+
+.react-flow__resize-control.handle {
+  background-color: #ffffff;
+  border-color: #9e86ed;
+  border-radius: 0;
+  width: 5px;
+  height: 5px;
+}
+
+/* 列車制御システム特有のスタイル */
+.flowContainer {
+  width: 100%;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.reactFlow {
+  background-color: #f7f9fb;
+}
+
+/* ReactFlowのデフォルトノードスタイルを完全にオーバーライド */
+:global {
+  /* デフォルトノードスタイルをリセット */
+  .react-flow__node {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    min-width: auto !important;
+    min-height: auto !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  /* 選択時のスタイルもカスタマイズ */
+  .react-flow__node.selectable:focus,
+  .react-flow__node.selectable.selected {
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* ハンドルスタイルを保護 */
+  .react-flow__handle {
+    z-index: 20;
+  }
+}
+
+/* 共通ハンドルスタイル - 掴みやすく改善 */
+.handle {
+  width: 12px !important;
+  height: 12px !important;
+  background-color: #3498db !important;
+  border: 2px solid #fff !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) !important;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+
+  &:hover {
+    width: 16px !important;
+    height: 16px !important;
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* 共通ノードスタイル - 外枠を削除 */
+.flowNode {
+  min-width: 100px;
+  min-height: 40px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  border: none !important; /* 外枠を削除 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+
+  &:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+  }
+}
+
+/* センサーノード - 純粋な円形のみ */
+.sensorNode {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0e0e0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  position: relative;
+
+  .nodeLabel {
+    position: absolute;
+    bottom: -25px;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+
+  &.active {
+    background-color: #4caf50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  }
+
+  &.inactive {
+    background-color: #e0e0e0;
+  }
+}
+
+/* 分岐器ノード - 純粋な形状のみ */
+.switchNode {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.25);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background-color: #1976d2;
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  }
+
+  .nodeLabel {
+    position: absolute;
+    bottom: -25px;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+
+  /* 西向き分岐器（デフォルト） */
+  &.west {
+    &.straight::before {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    &.diverging::before {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+  }
+
+  /* 東向き分岐器 - 矢印を反転 */
+  &.east {
+    &::before {
+      clip-path: polygon(100% 50%, 0% 0%, 0% 100%);
+    }
+
+    &.straight::before {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    &.diverging::before {
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
+  }
+}
+
+/* 停止位置ノード - 純粋な長方形のみ */
+.stopNode {
+  width: 70px;
+  height: 25px;
+  background-color: #ffeb3b;
+  box-shadow: 0 2px 6px rgba(251, 192, 45, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 4px;
+
+  .nodeLabel {
+    position: absolute;
+    bottom: -25px;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+
+  &.occupied {
+    background-color: #f44336;
+    box-shadow: 0 2px 6px rgba(244, 67, 54, 0.4);
+  }
+
+  &.vacant {
+    background-color: #8bc34a;
+    box-shadow: 0 2px 6px rgba(139, 195, 74, 0.4);
+  }
+}
+
+/* エッジスタイル */
+.trackEdge {
+  stroke: #424242;
+  stroke-width: 3;
+}
+
+/* アクティブな線路（列車が走行中）のスタイル */
+.trackEdgeActive {
+  stroke: #2196f3; /* 青色で表示 */
+  stroke-width: 3;
+}
+
+/* 列車ラベルのスタイル */
+.trainLabel {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  min-width: 120px;
+  pointer-events: all;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: rgba(0, 0, 0, 0.85);
+  }
+
+  .trainId {
+    font-weight: bold;
+    margin-right: 5px;
+    background-color: white;
+    color: black;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 10px;
+  }
+
+  .trainName {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .directionArrow {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+/* アニメーションカスタマイズ */
+:global {
+  /* ReactFlowのデフォルトアニメーションをカスタマイズ */
+  .react-flow__edge-path {
+    transition: stroke 0.3s;
+  }
+
+  /* アニメーションのスピードと見た目を調整 */
+  .react-flow__edge.animated .react-flow__edge-path {
+    stroke-dasharray: 5, 8;
+    animation: dashdraw 0.8s linear infinite;
+  }
+
+  @keyframes dashdraw {
+    from {
+      stroke-dashoffset: 13;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+/* React Flowノードのデフォルトボーダーを上書き */
+:global {
+  .react-flow__node {
+    border: none !important;
+  }
+}
+
+/* レスポンシブ設定 */
+@media (max-width: 768px) {
+  .flowNode {
+    min-width: 80px;
+    min-height: 30px;
+    padding: 5px;
+  }
+
+  .nodeLabel {
+    font-size: 10px;
+  }
+}
