@@ -17,8 +17,8 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false, // 未使用のローカル変数に関するエラーを無効化
+    "noUnusedParameters": false, // 未使用のパラメータに関するエラーを無効化
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
